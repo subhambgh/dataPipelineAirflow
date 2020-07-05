@@ -53,8 +53,8 @@ The description of each of these operators follows:
 The events data residing on S3 is partitioned by *year* (2018) and *month* (11). Our task is to incrementally load the event json files, and run it through the entire pipeline to calculate song popularity and store the result back into S3. In this manner, we can obtain the top songs per day in an automated fashion using the pipeline. Please note, this is a trivial analyis, but you can imagine other complex queries that follow similar structure.
 
 **Data Sets**
-1. Log data: s3://udacity-dend/log_data
-2. Song data: s3://udacity-dend/song_data
+1. Log data: s3://<bucket>/log_data
+2. Song data: s3://<bucket>/song_data
 
 *S3 Input events data*:
 ```bash
