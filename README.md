@@ -53,8 +53,9 @@ The description of each of these operators follows:
 The events data residing on S3 is partitioned by *year* (2018) and *month* (11). Our task is to incrementally load the event json files, and run it through the entire pipeline to calculate song popularity and store the result back into S3. In this manner, we can obtain the top songs per day in an automated fashion using the pipeline. Please note, this is a trivial analyis, but you can imagine other complex queries that follow similar structure.
 
 **Data Sets**
-1. Log data: s3://<bucket>/log_data
+`1. Log data: s3://<bucket>/log_data
 2. Song data: s3://<bucket>/song_data
+`
 
 *S3 Input events data*:
 ```bash
@@ -100,16 +101,12 @@ default_args = {
 
 ***Step 2: Start Apache Airflow***
 
-***Step 3: Configure Apache Airflow Hooks***
+***Step 3: Configure AWS and redshift Connection in Airflow (for Hooks)***
 
-On the left is the `aws credentials`. The Login and password are the IAM user's access key and secret key that you created. Basically, by using these credentials, we are able to read data from S3.
+`aws credentials` - The Login and password are the IAM user's access key and secret key that you created. Basically, by using these credentials, we are able to read data from S3.
 
-On the right is the `redshift connection`. These values can be easily gathered from your Redshift cluster
+`redshift connection`- Redshift cluster information like hosts, schema, username, password, port, etc
 
-***Step 4: Execute the create-tables-dag***
+***Step 4: Turn on the `sparkify_dag` dag***
 
-This dag will create the staging, fact and dimension tables. The reason we need to trigger this manually is because, we want to keep this out of main dag. Normally, creation of tables can be handled by just triggering a script. But for the sake of illustration, I created a DAG for this and had Airflow trigger the DAG. You can turn off the DAG once it is completed. After running this DAG, you should see all the tables created in the AWS Redshift.
-
-***Step 5: Turn on the `load_and_transform_data_in_redshift` dag***
-
-As the execution start date is `2018-11-1` with a schedule interval `@daily` and the execution end date is `2018-11-30`, Airflow will automatically trigger and schedule the dag runs once per day for 30 times. Shown below are the 30 DAG runs ranging from start_date till end_date, that are trigged by airflow once per day. 
+As the execution start date is `2018-11-1` with a schedule interval `@daily` and the execution end date is `2018-11-30`, Airflow will automatically trigger and schedule the dag runs once per day for 30 times. 
