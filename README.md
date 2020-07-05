@@ -72,7 +72,7 @@ s3://<bucket>/log_data/2018/11/
 
 *S3 Output song popularity data*:
 ```bash
-s3://skuchkula-topsongs/
+s3://sparkify-topsongs/
 songpopularity_2018-11-01
 songpopularity_2018-11-02
 songpopularity_2018-11-03
