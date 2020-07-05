@@ -43,9 +43,7 @@ The description of each of these operators follows:
 - **StageToRedshiftOperator**: Stages data to a specific redshift cluster from a specified S3 location. Operator uses templated fields to handle partitioned S3 locations.
 - **LoadFactOperator**: Loads data to the given fact table by running the provided sql statement. Supports delete-insert and append style loads.
 - **LoadDimensionOperator**: Loads data to the given dimension table by running the provided sql statement. Supports delete-insert and append style loads.
-- **SubDagOperator**: Two or more operators can be grouped into one task using the SubDagOperator. Here, I am grouping the tasks of checking if the given table has rows and then run a series of data quality sql commands.
-    - **HasRowsOperator**: Data quality check to ensure that the specified table has rows.
-    - **DataQualityOperator**: Performs data quality checks by running sql statements to validate the data.
+- **DataQualityOperator**: Performs data quality checks by running sql statements to validate the data.
 - **SongPopularityOperator**: Calculates the top ten most popular songs for a given interval. The interval is dictated by the DAG schedule.
 - **UnloadToS3Operator**: Stores the analysis result back to the given S3 location.
 
