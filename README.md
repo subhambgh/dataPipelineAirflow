@@ -100,15 +100,11 @@ default_args = {
 
 ***Step 2: Start Apache Airflow***
 
-![start_airflow](images/start_airflow.png)
-
 ***Step 3: Configure Apache Airflow Hooks***
 
 On the left is the `aws credentials`. The Login and password are the IAM user's access key and secret key that you created. Basically, by using these credentials, we are able to read data from S3.
 
 On the right is the `redshift connection`. These values can be easily gathered from your Redshift cluster
-
-![connections](images/connections.png)
 
 ***Step 4: Execute the create-tables-dag***
 
@@ -117,5 +113,3 @@ This dag will create the staging, fact and dimension tables. The reason we need 
 ***Step 5: Turn on the `load_and_transform_data_in_redshift` dag***
 
 As the execution start date is `2018-11-1` with a schedule interval `@daily` and the execution end date is `2018-11-30`, Airflow will automatically trigger and schedule the dag runs once per day for 30 times. Shown below are the 30 DAG runs ranging from start_date till end_date, that are trigged by airflow once per day. 
-
-![schedule](images/schedule.png)
